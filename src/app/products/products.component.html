@@ -1,0 +1,28 @@
+<invapp-header></invapp-header>
+
+<div [hidden]="hideProducts">
+  Number of Products Available:
+  <div [innerText]="numberOfProducts"></div>
+</div>
+<button (click)="toggle()">Toggle</button>
+
+<div *ngIf="selectedProduct">
+  {{selectedProduct | json}}
+</div>
+<br />
+<br />
+
+<div>
+  <button (click)="addProduct()">Add Product</button>
+</div>
+
+<!-- Json Pipe
+{{productList | json}} -->
+
+<div>
+  {{ product.availableProducts}}
+  <!-- {{ product?.availableProducts ?? "No Products" }} -->
+</div>
+<div *ngIf="hideProducts">
+  <invapp-product-list [productList]="productList" [title]="'Product List'" (selectedProduct)="selectProduct($event)"></invapp-product-list>
+</div>

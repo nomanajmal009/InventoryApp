@@ -1,0 +1,31 @@
+<h2>{{title}}</h2>
+<!-- {{productList}} -->
+<table class="table">
+    <tr>
+        <th>Even/Odd</th>
+        <th>Index</th>
+        <th>Product ID</th>
+        <th>Brand</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Available Date</th>
+    </tr>
+    <tr 
+      [ngClass]="e ? 'even' : 'odd'"
+      *ngFor="let product of productList let e = even; let i=index"
+    >
+        <td>{{e ? "Even" : "Odd"}}</td>
+        <td>{{i}}</td>
+        <td>{{product.productId}}</td>
+        <td>{{product.brand}}</td>
+        <td>{{product.type}}</td>
+        <td>{{product.price | currency : 'SAR '}}</td>
+        <td>{{product.availableDate | date : 'short'}}</td>
+        <td>
+            <button 
+            class="btn btn-primary"
+            (click)="selectProduct(product)">
+                Select
+            </button>
+        </td>
+</table>
