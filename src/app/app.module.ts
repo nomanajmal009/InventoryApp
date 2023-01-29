@@ -9,6 +9,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { ContainerComponent } from './container/container.component';
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appConfig.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,12 @@ import { ContainerComponent } from './container/container.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_SERVICE_CONFIG,
+      useValue: APP_CONFIG,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

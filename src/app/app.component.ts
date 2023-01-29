@@ -1,5 +1,7 @@
 import { style } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef, Optional, Inject } from '@angular/core';
+import { localStorageToken } from 'src/localstorage.token';
+import { LoggerService } from './logger.service';
 import { ProductsComponent } from './products/products.component';
 
 @Component({
@@ -19,8 +21,13 @@ export class AppComponent implements OnInit{
   @ViewChild('name', {static: true}) name!: ElementRef
   // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef
 
+  constructor(@Optional() private loggerService: LoggerService,
+  @Inject(localStorageToken) private localStorage: any){}
+
   ngOnInit(): void {
-    this.name.nativeElement.innerText = "This is displaying from ViewChild"
+    this.loggerService?.log('AppComponent.ngOnInit')
+    this.name.nativeElement.innerText = "AL Hadba Workshop Trademark"
+    this.localStorage.setItem('name', 'AL Hadba Workshop')
   }
 
   // ngAfterViewInit(): void {

@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  SkipSelf,
   ViewChild,
 } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Product, ProductList } from './products';
+import { ProductsService } from './services/products.service';
 
 @Component({
   selector: 'invapp-products',
@@ -29,34 +31,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
+  constructor(@SkipSelf() private productsService: ProductsService) { }
+
   ngOnInit(): void {
     console.log(this.headerComponent)
-    this.productList = [
-      {
-        productId: 1,
-        price: 100,
-        type: 'Air Conditioner',
-        brand: 'Samsung',
-        photo: 'https://unsplash.com/photos/Q4f_0gKTMEk',
-        availableDate: new Date('01-01-2023'),
-      },
-      {
-        productId: 2,
-        price: 100,
-        type: 'Air Conditioner',
-        brand: 'Gree',
-        photo: 'https://unsplash.com/photos/HDfQ1uXmFh0',
-        availableDate: new Date('01-01-2023'),
-      },
-      {
-        productId: 3,
-        price: 100,
-        type: 'Air Conditioner',
-        brand: 'Panasonic',
-        photo: 'https://unsplash.com/photos/a6vdV5vlrdM',
-        availableDate: new Date('01-01-2023'),
-      },
-    ];
+    this.productList = this.productsService.getProducts();
   }
 
   ngAfterViewInit() {
