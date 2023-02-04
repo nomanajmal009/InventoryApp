@@ -8,7 +8,7 @@ import { ProductList } from '../products';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnChanges, OnDestroy{
-  @Input() productList: ProductList[] = [];
+  @Input() productList: ProductList[] | null= [];
   @Input() title: string = '';
   @Output() selectedProduct = new EventEmitter<ProductList>();
 

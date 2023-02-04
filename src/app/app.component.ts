@@ -1,6 +1,7 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef, Optional, Inject } from '@angular/core';
 import { localStorageToken } from 'src/localstorage.token';
+import { InitService } from './init.service';
 import { LoggerService } from './logger.service';
 import { ProductsComponent } from './products/products.component';
 
@@ -22,7 +23,11 @@ export class AppComponent implements OnInit{
   // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef
 
   constructor(@Optional() private loggerService: LoggerService,
-  @Inject(localStorageToken) private localStorage: any){}
+  @Inject(localStorageToken) private localStorage: any,
+  private initService: InitService
+  ){
+    console.log(initService.config)
+  }
 
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit')

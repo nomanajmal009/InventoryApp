@@ -74,7 +74,8 @@
               "browserTarget": "shopInventoryApp:build:production"
             },
             "development": {
-              "browserTarget": "shopInventoryApp:build:development"
+              "browserTarget": "shopInventoryApp:build:development",
+              "proxyConfig": "src/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"

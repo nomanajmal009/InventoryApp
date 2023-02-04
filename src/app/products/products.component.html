@@ -12,17 +12,24 @@
 <br />
 <br />
 
+<h1>{{ getError$ | async }}</h1>
 <div>
   <button (click)="addProduct()">Add Product</button>
+  <button (click)="editProduct()">Edit Product</button>
+  <button (click)="deleteProduct()">Delete Product</button>
 </div>
 
 <!-- Json Pipe
 {{productList | json}} -->
+
+<h1>Number of Products {{productsCount$ | async}}</h1>
 
 <div>
   {{ product.availableProducts}}
   <!-- {{ product?.availableProducts ?? "No Products" }} -->
 </div>
 <div *ngIf="hideProducts">
-  <invapp-product-list [productList]="productList" [title]="'Product List'" (selectedProduct)="selectProduct($event)"></invapp-product-list>
+  <invapp-product-list [productList]="products$ | async" [title]="'Product List'" (selectedProduct)="selectProduct($event)"></invapp-product-list>
 </div>
+
+<h1>{{totalBytes}} Loaded</h1>
