@@ -8,7 +8,7 @@ import { ProductsService } from '../products/services/products.service';
   providers: [ProductsService]
 })
 export class UserComponent {
-  userName: string = ''
+  userName: string = 'Noman Ajmal'
 
   constructor(@Self() productsService: ProductsService){}
 }

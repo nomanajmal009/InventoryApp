@@ -22,10 +22,11 @@
         <td>{{product.price | currency : 'SAR '}}</td>
         <td>{{product.availableDate | date : 'short'}}</td>
         <td>
-            <button 
+            <!-- <button 
             class="btn btn-primary"
             (click)="selectProduct(product)">
                 Select
-            </button>
+            </button> -->
+            <button class="btn btn-primary" [routerLink]="['/products', product.productId]">Book Product</button>
         </td>
 </table>

@@ -1,0 +1,84 @@
+{{ productsForm.pristine | json }}
+<br />
+{{ productsForm.dirty | json }}
+<br />
+<!-- if your any of your control have validation error then valid is false -->
+{{ productsForm.valid | json }}
+<br />
+<!-- if your any of your control have validation error then invalid is true -->
+{{ productsForm.invalid | json }}
+<br />
+{{ productsForm.value | json }}
+<br />
+
+<div *ngIf="addedMessage !== ''" class="alert alert-success">
+  {{ addedMessage }}
+</div>
+<div class="container">
+  <form #productsForm="ngForm" (ngSubmit)="AddProduct(productsForm)">
+    <div class="form-group">
+      <input
+        #productBrand="ngModel"
+        class="form-control"
+        type="text"
+        name="brand"
+        [(ngModel)]="product.brand"
+        placeholder="Product Brand"
+        required
+        minlength="5"
+        maxlength="20"
+      />
+    </div>
+    <div class="alert alert-danger" *ngIf="productBrand.errors?.['minlength']">
+      Brand should be minimum 5 chars!
+    </div>
+    <div class="alert alert-danger" *ngIf="productBrand.dirty && productBrand.errors?.['required']">
+      Please provide the product brand
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="number"
+        name="price"
+        [(ngModel)]="product.price"
+        placeholder="Price"
+        required
+        min="0"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="type"
+        [(ngModel)]="product.type"
+        placeholder="Product Type"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="photos"
+        [(ngModel)]="product.photo"
+        placeholder="Photo (Provide Link)"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="date"
+        name="availableDate"
+        [(ngModel)]="product.availableDate"
+        placeholder="Available Date"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="productsForm.invalid">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

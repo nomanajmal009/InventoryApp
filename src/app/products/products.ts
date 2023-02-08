@@ -5,7 +5,7 @@ export interface Product{
 }
 
 export interface ProductList{
-    productId: string,
+    productId?: string,
     price : number,
     type : string,
     brand : string,
