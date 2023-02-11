@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'invapp-login',
@@ -9,10 +10,13 @@ export class LoginComponent {
   email : string = ''
   password : string = ''
 
+  constructor(private router: Router){}
+
   Login(){
     if (this.email == 'admin@gmail.com' && this.password == 'Admin')
     {
-      alert("Login Successful")
+      this.router.navigate(['/products', 'form'])
+      // this.router.navigateByUrl('/products/form')
     }
   }
 }

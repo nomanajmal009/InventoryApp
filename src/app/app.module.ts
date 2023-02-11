@@ -3,10 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductListComponent } from './products/product-list/product-list.component';
-import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { ContainerComponent } from './container/container.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appConfig.service';
@@ -20,12 +17,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ProductsBookingComponent } from './products/products-booking/products-booking.component';
-import { ProductsFormComponent } from './products/products-form/products-form.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './emailvalidator/email-validator.directive';
+// import { ProductsModule } from './products/products.module';
+import { HeaderModule } from './header/header.module';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RouteConfigToken } from './services/routeConfig.service';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -33,21 +32,16 @@ function initFactory(initService: InitService) {
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent,
-    ProductListComponent,
-    HeaderComponent,
     UserComponent,
     ContainerComponent,
     AppNavComponent,
-    ProductsBookingComponent,
-    ProductsFormComponent,
     LoginComponent,
     HoverDirective,
     EmailValidatorDirective,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
@@ -57,6 +51,9 @@ function initFactory(initService: InitService) {
     MatIconModule,
     MatListModule,
     FormsModule,
+    // ProductsModule,
+    AppRoutingModule,
+    HeaderModule,
   ],
   providers: [
     {
@@ -73,6 +70,10 @@ function initFactory(initService: InitService) {
       useFactory: initFactory,
       deps: [InitService],
       multi: true,
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: { title: 'Home' }
     },
   ],
   bootstrap: [AppComponent],

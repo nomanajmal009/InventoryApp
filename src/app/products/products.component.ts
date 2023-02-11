@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { catchError, map, Observable, Subject } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
+import { ConfigService } from '../services/config.service';
 import { Product, ProductList } from './products';
 import { ProductsService } from './services/products.service';
 
@@ -30,21 +31,21 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   };
   totalBytes = 0;
   productList: ProductList[] = [];
-  
-  erorr$ = new Subject<string>
+
+  erorr$ = new Subject<string>();
   getError$ = this.erorr$.asObservable();
 
   products$ = this.productsService.getProducts$.pipe(
     catchError((err) => {
       console.log(err);
-      this.erorr$.next(err.message)
-      return []
+      this.erorr$.next(err.message);
+      return [];
     })
   );
 
   productsCount$ = this.productsService.getProducts$.pipe(
     map((products) => products.length)
-  )
+  );
 
   // stream = new Observable((observer) => {
   //   observer.next('user1');
@@ -55,7 +56,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
-  constructor(@SkipSelf() private productsService: ProductsService) {}
+  constructor(
+    @SkipSelf() private productsService: ProductsService,
+    private configService: ConfigService
+  ) {}
 
   ngOnInit(): void {
     // this.stream.subscribe({
