@@ -70,7 +70,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     // this.stream.subscribe((data) => console.log(data))
 
-    console.log(this.headerComponent);
     // this.productsService.getProducts$.subscribe((products) => {
     //   this.productList = products;
     // })
@@ -78,11 +77,11 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     this.productsService.getPhotos().subscribe((event) => {
       switch (event.type) {
         case HttpEventType.Sent: {
-          console.log('Request has been made');
+          // console.log('Request has been made');
           break;
         }
         case HttpEventType.ResponseHeader: {
-          console.log('Request Success');
+          // console.log('Request Success');
           break;
         }
         case HttpEventType.DownloadProgress: {
@@ -90,7 +89,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
           break;
         }
         case HttpEventType.Response: {
-          console.log(event.body);
+          // console.log(event.body);
         }
       }
     });
@@ -98,7 +97,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.headerComponent.title = 'Products View';
-    console.log(this.headerComponent);
   }
 
   selectProduct(product: ProductList) {

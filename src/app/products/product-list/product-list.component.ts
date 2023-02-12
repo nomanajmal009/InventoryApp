@@ -13,7 +13,6 @@ export class ProductListComponent implements OnChanges, OnDestroy{
   @Output() selectedProduct = new EventEmitter<ProductList>();
 
   ngOnChanges(changes: SimpleChanges): void{
-    // console.log(changes)
     if(changes['title'])
     {
       this.title = changes['title'].currentValue.toUpperCase();
@@ -21,7 +20,6 @@ export class ProductListComponent implements OnChanges, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    console.log('onDestroy is called')
   }
 
   selectProduct(product: ProductList)

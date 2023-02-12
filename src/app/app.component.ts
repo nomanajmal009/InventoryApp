@@ -1,6 +1,7 @@
 import { style } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef, Optional, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 import { localStorageToken } from 'src/localstorage.token';
 import { InitService } from './init.service';
 import { LoggerService } from './logger.service';
@@ -29,14 +30,21 @@ export class AppComponent implements OnInit{
   private initService: InitService, 
   private configService: ConfigService,
   private router:Router
-  ){
-    console.log(initService.config)
-  }
+  ){}
 
   ngOnInit(): void {
-    this.router.events.subscribe((event)=> {
-      console.log(event)
-    })
+    this.router.events.pipe(
+      filter((event) => event  instanceof NavigationStart)
+    ).subscribe((evant) =>
+      console.log('Navigation Started')
+    )
+
+    this.router.events.pipe(
+      filter((event) => event  instanceof NavigationEnd)
+    ).subscribe((evant) =>
+      console.log('Navigation Completed')
+    )
+
     this.loggerService?.log('AppComponent.ngOnInit')
     this.name.nativeElement.innerText = "AL Hadba Workshop Trademark"
     this.localStorage.setItem('name', 'AL Hadba Workshop')

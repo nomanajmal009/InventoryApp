@@ -16,8 +16,6 @@ export class ProductsService {
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   private http: HttpClient) {
-    console.log('Product Service Initialized')
-    console.log(this.config.apiEndpoint)
    }
 
   // getProducts(){
