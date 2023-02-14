@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: ProductsComponent,
-    canActivateChild: [ProductGuard],
+    // canActivateChild: [ProductGuard],
     children: [
       { path: 'form', component: ProductsFormComponent },
       { path: ':id', component: ProductsBookingComponent },

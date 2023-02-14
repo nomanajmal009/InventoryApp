@@ -15,7 +15,7 @@ export class ProductsFormComponent {
     price: 0,
     type: '',
     photo: '',
-    availableDate: new Date(),
+    shippingDate: new Date(),
   };
 
   constructor(private productService: ProductsService) {}
@@ -30,7 +30,7 @@ export class ProductsFormComponent {
           price: 0,
           type: '',
           photo: '',
-          availableDate: new Date(),
+          shippingDate: new Date(),
         })
       });
   }

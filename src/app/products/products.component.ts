@@ -111,7 +111,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       type: 'Air Conditioner',
       brand: 'Panasonic',
       photo: 'https://unsplash.com/photos/a6vdV5vlrdM',
-      availableDate: new Date('01-01-2023'),
+      shippingDate: new Date('01-01-2023'),
     };
     // this.productList.push(product)
     this.productsService.addProduct(product).subscribe((data) => {
@@ -126,7 +126,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       type: 'Air Conditioner',
       brand: 'Panasonic',
       photo: 'https://unsplash.com/photos/a6vdV5vlrdM',
-      availableDate: new Date('01-01-2023'),
+      shippingDate: new Date('01-01-2023'),
     };
     this.productsService.editProduct(product).subscribe((data) => {
       this.productList = data;

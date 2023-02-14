@@ -10,5 +10,5 @@ export interface ProductList{
     type : string,
     brand : string,
     photo : string,
-    availableDate : Date
+    shippingDate : Date
 }

@@ -12,14 +12,14 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
-    canActivate: [LoginGuard],
-    canLoad: [LoginGuard]
+    // canActivate: [LoginGuard],
+    // canLoad: [LoginGuard]
   },
   {
     path: 'booking',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
-    canActivate: [LoginGuard],
+    // canActivate: [LoginGuard],
   },
   //default route
   { path: '', redirectTo: '/login', pathMatch: 'full' },
