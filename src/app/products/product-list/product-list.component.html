@@ -1,6 +1,6 @@
 <h2>{{title}}</h2>
 <!-- {{productList}} -->
-<table class="table">
+<table class="table" *ngIf="productList">
     <tr>
         <th>Even/Odd</th>
         <th>Index</th>
@@ -12,7 +12,7 @@
     </tr>
     <tr 
       [ngClass]="e ? 'even' : 'odd'"
-      *ngFor="let product of productList let e = even; let i=index"
+      *ngFor="let product of productList | filter : price; let e = even; let i=index"
     >
         <td>{{e ? "Even" : "Odd"}}</td>
         <td>{{i}}</td>
@@ -27,6 +27,6 @@
             (click)="selectProduct(product)">
                 Select
             </button> -->
-            <button class="btn btn-primary" [routerLink]="['/products', product.productId]">Book Product</button>
+            <button class="btn btn-primary" [routerLink]="['/booking', product.productId]">Book Product</button>
         </td>
 </table>

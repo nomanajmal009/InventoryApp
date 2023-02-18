@@ -1,15 +1,15 @@
-{{ productsForm.pristine | json }}
+<!-- {{ productsForm.pristine | json }}
 <br />
 {{ productsForm.dirty | json }}
-<br />
+<br /> -->
 <!-- if your any of your control have validation error then valid is false -->
-{{ productsForm.valid | json }}
-<br />
+<!-- {{ productsForm.valid | json }} -->
+<!-- <br /> -->
 <!-- if your any of your control have validation error then invalid is true -->
-{{ productsForm.invalid | json }}
+<!-- {{ productsForm.invalid | json }}
 <br />
 {{ productsForm.value | json }}
-<br />
+<br /> -->
 
 <div *ngIf="addedMessage !== ''" class="alert alert-success">
   {{ addedMessage }}
@@ -27,13 +27,16 @@
         required
         minlength="5"
         maxlength="20"
-        [ngModelOptions]="{ updateOn: 'blur'}"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
     <div class="alert alert-danger" *ngIf="productBrand.errors?.['minlength']">
       Brand should be minimum 5 chars!
     </div>
-    <div class="alert alert-danger" *ngIf="productBrand.dirty && productBrand.errors?.['required']">
+    <div
+      class="alert alert-danger"
+      *ngIf="productBrand.dirty && productBrand.errors?.['required']"
+    >
       Please provide the product brand
     </div>
     <div class="form-group">

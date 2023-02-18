@@ -1,39 +1,48 @@
 <invapp-header></invapp-header>
 
-<div [hidden]="hideProducts">
+<!-- <div [hidden]="hideProducts">
   Number of Products Available:
   <div [innerText]="numberOfProducts"></div>
-</div>
-<button (click)="toggle()">Toggle</button>
+</div> -->
 
 <div *ngIf="selectedProduct">
-  {{selectedProduct | json}}
+  {{ selectedProduct | json }}
 </div>
 <br />
 <br />
 
 <h1>{{ getError$ | async }}</h1>
 <div>
-  <button routerLink="form">Add Product</button>
+  <button (click)="toggle()" class="btn btn-success">Toggle</button>
+  <button routerLink="form" class="btn btn-success">Add Product</button>
   <!-- <button (click)="addProduct()">Add Product</button> -->
-  <button (click)="editProduct()">Edit Product</button>
-  <button (click)="deleteProduct()">Delete Product</button>
+  <!-- <button (click)="editProduct()" class="btn btn-success">Edit Product</button>
+  <button (click)="deleteProduct()" class="btn btn-success">Delete Product</button> -->
 </div>
 
+{{priceFilter | json}}
+
+<div>
+  <input type="number" class="form-control" placeholder="Price" [formControl]="priceFilter">
+</div>
 <!-- Json Pipe
 {{productList | json}} -->
 
-<h1>Number of Products {{productsCount$ | async}}</h1>
+<!-- <h1>Number of Products {{productsCount$ | async}}</h1>
 
 <div>
   {{ product.availableProducts}}
-  <!-- {{ product?.availableProducts ?? "No Products" }} -->
-</div>
+  {{ product?.availableProducts ?? "No Products" }}
+</div> -->
 <div *ngIf="hideProducts">
-  <invapp-product-list [productList]="products$ | async" [title]="'Product List'" (selectedProduct)="selectProduct($event)"></invapp-product-list>
+  <invapp-product-list
+    [productList]="products$ | async"
+    [price]="priceFilter.value"
+    [title]="'Product List'"
+    (selectedProduct)="selectProduct($event)"
+  ></invapp-product-list>
 </div>
 
-<h1>{{totalBytes}} Loaded</h1>
-
+<h1>{{ totalBytes }} Loaded</h1>
 
 <router-outlet></router-outlet>

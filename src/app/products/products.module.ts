@@ -6,9 +6,10 @@ import { ProductsComponent } from './products.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductsBookingComponent } from './products-booking/products-booking.component';
 import { ProductsFormComponent } from './products-form/products-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
 import { RouteConfigToken } from '../services/routeConfig.service';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import { RouteConfigToken } from '../services/routeConfig.service';
     ProductListComponent,
     ProductsBookingComponent,
     ProductsFormComponent,
+    FilterPipe,
   ],
-  imports: [CommonModule, ProductsRoutingModule, FormsModule, HeaderModule],
+  imports: [CommonModule, ProductsRoutingModule, FormsModule, HeaderModule, ReactiveFormsModule],
   providers: [
     {
       provide: RouteConfigToken,

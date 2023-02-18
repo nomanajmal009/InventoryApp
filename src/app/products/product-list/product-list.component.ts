@@ -5,12 +5,13 @@ import { ProductList } from '../products';
   selector: 'invapp-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnChanges, OnDestroy{
   @Input() productList: ProductList[] | null= [];
   @Input() title: string = '';
   @Output() selectedProduct = new EventEmitter<ProductList>();
+  @Input() price = 0 ;
 
   ngOnChanges(changes: SimpleChanges): void{
     if(changes['title'])

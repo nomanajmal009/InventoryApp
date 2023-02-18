@@ -12,7 +12,7 @@ const routes: Routes = [
     // canActivateChild: [ProductGuard],
     children: [
       { path: 'form', component: ProductsFormComponent },
-      { path: ':id', component: ProductsBookingComponent },
+      // { path: ':id', component: ProductsBookingComponent },
     ],
   },
 ];

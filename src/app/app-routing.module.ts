@@ -12,17 +12,18 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
-    // canActivate: [LoginGuard],
-    // canLoad: [LoginGuard]
+    canActivate: [LoginGuard],
+    canLoad: [LoginGuard]
   },
   {
-    path: 'booking',
+    path: 'booking/:roomid',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
     // canActivate: [LoginGuard],
   },
   //default route
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'comments', loadChildren: () => import('./comment/comment.module').then(m => m.CommentModule) },
   //wild card route
   { path: '**', component: NotfoundComponent },
 ];

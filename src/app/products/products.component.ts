@@ -7,6 +7,7 @@ import {
   SkipSelf,
   ViewChild,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { catchError, map, Observable, Subject } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { ConfigService } from '../services/config.service';
@@ -42,6 +43,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       return [];
     })
   );
+
+  priceFilter = new FormControl(0, {nonNullable: true})
 
   productsCount$ = this.productsService.getProducts$.pipe(
     map((products) => products.length)

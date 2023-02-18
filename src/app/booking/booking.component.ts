@@ -6,6 +6,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { exhaustMap, mergeMap, switchMap } from 'rxjs';
+import { BookingService } from './booking.service';
+import { CustomValidator } from './validators/custom-validator';
 
 @Component({
   selector: 'invapp-booking',
@@ -19,12 +23,17 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('notes') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private bookingService: BookingService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    const productId = this.route.snapshot.paramMap.get('roomid')
     this.bookingForm = this.fb.group(
       {
-        productId: new FormControl({ value: '1', disabled: true }),
+        productId: new FormControl({ value: productId, disabled: true }),
         buyerEmail: new FormControl('', {
           updateOn: 'blur',
           validators: [Validators.required, Validators.email],
@@ -36,7 +45,12 @@ export class BookingComponent implements OnInit {
         mobileNumber: new FormControl(''),
         buyerName: new FormControl('', {
           updateOn: 'blur',
-          validators: [Validators.required, Validators.minLength(5)],
+          validators: [
+            Validators.required,
+            Validators.minLength(5),
+            CustomValidator.ValidateName,
+            CustomValidator.validateSpecialChar('*')
+          ],
         }),
         address: this.fb.group({
           addressLine1: new FormControl('', {
@@ -50,19 +64,33 @@ export class BookingComponent implements OnInit {
         }),
         notes: this.fb.array([this.addNoteControl()]),
         tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
-      },
-      { updateOn: 'blur' }
+      }
+      // { updateOn: 'blur' }
     );
     this.getBookingData();
-    this.bookingForm.valueChanges.subscribe((data) => {
-      console.log(data);
-    });
+    // this.bookingForm.valueChanges.subscribe((data) => {
+    //   this.bookingService.bookRoom(data).subscribe((data)=>{})
+    // });
+
+    this.bookingForm.valueChanges
+      .pipe(
+        //doesn't care about sequence post the data or susbscribe to stream as data is provided
+        // mergeMap((data)=> this.bookingService.bookRoom(data))
+
+        //cancel old request if it recieves new data from the stream
+        // switchMap((data)=> this.bookingService.bookRoom(data))
+
+        //cares about the sequence if the previous request is not completed new one will not send
+        exhaustMap((data) => this.bookingService.bookRoom(data))
+      )
+      .subscribe((data) => console.log(data));
   }
 
   addBooking() {
     console.log(this.bookingForm.getRawValue());
+
     this.bookingForm.reset({
-      productId: '1',
+      productId: '',
       buyerEmail: '',
       shippingDate: '',
       bookingStatus: '',
@@ -81,7 +109,6 @@ export class BookingComponent implements OnInit {
       notes: [],
       tnc: false,
     });
-    this.bookingForm;
   }
 
   addNotes() {
@@ -112,7 +139,6 @@ export class BookingComponent implements OnInit {
 
   getBookingData() {
     this.bookingForm.patchValue({
-      productId: '1',
       buyerEmail: 'noman@gmail.com',
       shippingDate: new Date('10-Feb-2023'),
       bookingStatus: '',
